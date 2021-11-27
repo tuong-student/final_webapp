@@ -1,0 +1,154 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: rgba(34, 156, 212, 0.808);
+    --sub-primary-color: rgba(94, 196, 243, 0.712);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: helvetica, arial, sans-serif;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.header {
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.header_img {
+    max-width: 100px;
+}
+
+.header .shop-name {
+    margin: 0 auto;
+    font-size: 78px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    margin-top: 12px;
+}
+
+.sider {
+    background-color: var(--sub-primary-color);
+    width: 150px;
+    border-radius: 5px;
+}
+
+.main_content {
+    width: 100%;
+    margin-left: 12px;
+}
+
+.items {
+    list-style: none;
+    padding: 0 24px;
+}
+
+.item {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.281);
+    margin-bottom: 14px;
+    line-height: 34px;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 3px;
+}
+
+.item_lables {
+    display: flex;
+    line-height: 34px;
+    font-weight: bold;
+}
+
+.item_lables-4 {
+    display: flex;
+    line-height: 34px;
+    font-weight: bold;
+    padding-left: 58px;
+}
+
+.lable {
+    width: calc(100% / 3);
+    text-align: center;
+}
+
+.lable-4 {
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+.item_img {
+    max-width: 50px;
+    margin: 10px 0 10px 10px;
+}
+
+.text_container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.item_text {
+    width: calc(100% / 3);
+    text-align: center;
+}
+
+.item_text-4 {
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+.item_add {
+    float: right;
+    margin-right: 24px;
+    margin-bottom: 14px;
+    line-height: 34px;
+    padding: 0 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    font-weight: bold;
+    color: white;
+    box-shadow: 2px 2px 2px black;
+}
+
+.item_add:hover {
+    opacity: 0.8;
+}
+
+.sider_functions {
+    list-style: none;
+}
+
+.sider_function {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 12px;
+}
+
+.sider_function:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    animation: move-right 0.3s linear forwards;
+}
+
+@keyframes move-right {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(4px);
+    }
+}

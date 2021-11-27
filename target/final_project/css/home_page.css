@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+}
+
+.item {
+    padding: 0 12px 0;
+    width: 120px;
+}
+
+.item__img {
+    max-width: 100%;
+}
+
+.item__name {}
+
+.item_desc {}
+
+.item__price {}

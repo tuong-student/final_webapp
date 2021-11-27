@@ -1,0 +1,729 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $font;
+    color: $neu-08;
+    overflow-x: hidden;
+}
+
+.mainNav {
+    @include paddingSide;
+    @include transition;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 3;
+
+    @include sm {
+        height: 64px;
+    }
+
+    &:before {
+        @include transition;
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: white;
+        top: -100%;
+        left: 0;
+        box-shadow: $shadow;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    &__logo {
+        @include transition();
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100px;
+
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+
+        @include sm {
+            width: 72px;
+        }
+    }
+
+    &__wrapper {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        @include sm {
+            @include transition;
+            height: 100vh;
+            right: 0;
+            top: 0;
+            position: fixed;
+            width: 100%;
+            padding: 0 10%;
+            justify-content: center;
+            display: flex;
+            visibility: hidden;
+            
+            &:before,
+            &:after {
+                content: '';
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                transform: translateX(100%);
+                background-color: rgba($neu-09, 0.5);
+                opacity: 1;
+                transition: all 0.4s 0.2s ease;
+            }
+
+            &:after {
+                transition: all 0.4s ease;
+                background-color: $neu-08;
+            }
+        }
+    }
+
+    &__icon {
+        width: 32px;
+        height: 32px;
+        display: none;
+        z-index: 1;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        @include sm {
+            display: flex;
+        }
+
+        span {
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+
+            &:before,
+            &:after {
+                content: '';
+                width: 32px;
+                height: 100%;
+                position: absolute;
+                background-color: inherit;
+                transition: inherit;
+            }
+
+            &:before {
+                transform: translateY(-8px);
+            }
+
+            &:after {
+                transform: translateY(8px);
+            }
+        }
+    }
+
+    &__links {
+        @include transition;
+        z-index: 1;
+        color: white;
+
+        @include sm {
+            display: none;
+        }
+    }
+
+    &__linkItem {
+        @include ctaStyle;
+        font-weight: 700;
+        margin-right: 64px;
+        position: relative;
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        &:before {
+            content: '';
+            width: calc(100% + 12px);
+            height: 2px;
+            left: -6px;
+            bottom: -10px;
+            position: absolute;
+            background-color: $neu-04;
+            opacity: 0;
+            z-index: -1;
+            border-radius: $radius;
+            transition: all 0.3s ease;
+        }
+
+        &:hover {
+            &:before {
+                bottom: -2px;
+                opacity: 0.5;
+                height: calc(100% + 4px);
+            }
+        }
+
+        &.active {
+            &:before {
+                bottom: -2px;
+                opacity: 0.5;
+                height: calc(100% + 4px);
+            }
+        }
+
+        @include sm {
+            @include transition;
+            margin-right: 0px;
+            margin-bottom: 32px;
+            font-size: 24px;
+            font-weight: 600;
+            opacity: 0;
+            color: white;
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    &.navSticky {
+        height: 72px;
+
+        @include sm {
+            height: 64px;
+        }
+
+        &:before {
+            opacity: 1;
+            top: 0;
+        }
+
+        .mainNav {
+            &__logo {
+                width: 80px;
+
+                @include sm {
+                    width: 72px;
+                }
+            }
+
+            &__links {
+                color: $neu-08;
+            }
+
+            &__icon {
+                span {
+                    background-color: $neu-08;
+                }
+            }
+        }
+    }
+
+    &.navDark {
+        .mainNav {
+            &__links {
+                color: $neu-08;
+            }
+
+            &__icon {
+                span {
+                    background-color: $neu-08;
+                }
+            }
+        }
+    }
+
+    &.navOpen {
+        .mainNav {
+            &__icon {
+                span {
+                    background-color: $neu-01;
+                    width: 0;
+                    transform: rotate(90deg);
+
+                    &:before {
+                        transform: rotate(45deg);
+                    }
+
+                    &:after {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+
+            &__wrapper {
+                visibility: visible;
+
+                &:before,
+                &:after {
+                    transition: all 0.6s 0.2s ease;
+                    transform: translateX(0%);
+                }
+
+                &:after {
+                    transition-delay: 0.3s;
+                }
+            }
+
+            &__links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            &__linkItem {
+                @include transition;
+                @include animationEnter;
+                @include delayEnter;
+                animation-delay: 0.2s;
+                opacity: 1;
+
+                &:before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.sliderHeading {
+    height: 100vh;
+
+    @include sm {
+        height: 560px;
+    }
+
+    .swiper-container {
+        height: calc(100% - 100px);
+        margin-top: 100px;
+
+        @include sm {
+            height: calc(100% - 64px);
+            margin-top: 64px;
+        }
+    }
+
+    &__wrapper {
+        @include paddingSide;
+        padding-right: 0;
+        display: flex;
+        height: 100%;
+        position: relative;
+
+        @include sm {
+            padding: 0;
+            flex-direction: column-reverse;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 50vw;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: $neu-03;
+            z-index: -1;
+
+            @include xs {
+                width: calc(100% - 80px);
+            }
+        }
+    }
+
+    &__image {
+        height: 100%;
+    }
+
+    &__text {
+        width: 50%;
+        min-width: 300px;
+        position: relative;
+        padding: 48px 48px 48px 0;
+        padding-top: calc(48px + 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 2;
+
+        @include sm {
+            width: calc(100% - 80px);
+            padding: 24px 5vw;
+        }
+
+        @include xs {
+            padding: 24px;
+        }
+    }
+
+    &__arrows {
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: initial;
+            bottom: initial;
+            left: initial;
+            right: initial;
+            position: initial;
+            width: 72px;
+            height: 72px;
+            background-color: $neu-06;
+
+            &:last-child {
+                background-color: $neu-07;
+            }
+
+            &:after {
+                width: 32px;
+                height: 32px;
+                color: transparent;
+            }
+        }
+
+        @include sm {
+            display: none;
+        }
+    }
+
+    &__title {
+        @include font-xl;
+        z-index: 1;
+    }
+
+    &__subtitle {
+        @include font-m;
+        z-index: 1;
+    }
+}
+
+.moduleIntro {
+    @include spacingL;
+    @include moduleDefault;
+    width: 100%;
+    overflow-x: hidden;
+
+    &__wrapper {
+        @include wrapper;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    &__image {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        margin-bottom: 56px;
+
+        img {
+            @include sm {
+                width: 100vw;
+            }
+        }
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+        text-align: center;
+
+        @include sm {
+            width: 100%;
+            margin-top: 32px;
+        }
+    }
+
+    &__title {
+        @include font-m;
+    }
+}
+
+.contentMedia {
+    @include spacingL;
+    @include moduleDefault;
+    width: 100%;
+    overflow-x: hidden;
+
+    &__wrapper {
+        @include wrapper;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        @include sm {
+            flex-direction: column;
+        }
+    }
+
+    &__image {
+        width: 50%;
+        height: 100%;
+
+        @include sm {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        img {
+            @include sm {
+                width: 100vw;
+            }
+        }
+    }
+
+    &__content {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 1;
+
+        @include sm {
+            width: 100%;
+            margin-top: 32px;
+
+        }
+    }
+
+    &.right {
+        .contentMedia {
+            &__wrapper {
+                flex-direction: row-reverse;
+
+                @include sm {
+                    flex-direction: column;
+                }
+            }
+
+            &__image {
+                @include sm {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+
+                img {
+                    @include sm {
+                        width: 100vw;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.productSlider {
+    @include spacingL;
+    @include moduleDefault;
+
+    .swiper-wrapper {
+        padding-bottom: 24px;
+    }
+
+    .swiper-button-prev {
+        left: -32px;
+    }
+
+    .swiper-button-next {
+        right: -32px;
+    }
+
+    .swiper-pagination {
+        display: none;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include sm {
+            display: block;
+        }
+    }
+
+    &__wrapper {
+        @include wrapper;
+        height: 100%;
+        position: relative;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__sliderContainer {
+        position: relative;
+        padding: 0 40px;
+
+        @include sm {
+            padding: 0;
+            padding-bottom: 40px;
+        }
+    }
+
+    &__slider {
+        padding: 0 2px;
+    }
+
+    &__image {
+        width: 100%;
+        height: 150px;
+        //top: 0;
+    }
+
+    &__text {
+       text-align: center;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       padding-bottom: 24px;
+    }
+
+    &__productTitle {
+        @include font-m;
+    }
+
+    &__productSubtitle {
+        @include font-s;
+    }
+
+    &__link {
+        @include transition2;
+        opacity: 0;
+        position: absolute;
+        bottom: 24px;
+        transform: translateY(20px);
+
+        @include sm {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
+
+    &__card {
+        @include cardStyle1;
+        height: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
+        &:hover {
+            .productSlider {
+                &__link {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.ctaBlock {
+    @include moduleDefault;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &__wrapper {
+        @include spacingL;
+        min-height: 320px;
+        width: 100%;
+        position: relative;
+    }
+
+    &__content {
+        @include wrapper;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__text {
+        max-width: $textMaxWidth;
+    }
+}
+
+.footer {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+
+    &__top,
+    &__bottom {
+        @include paddingSide;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include sm {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    &__top {
+        height: 200px;
+        background-color: $neu-08;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__bottom {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        background-color: $neu-09;
+        color: $neu-06;
+    }
+
+    &__logo {
+        width: 160px;
+        margin: 0 auto;
+    }
+
+    &__text {
+        @include font-s;
+    }
+
+    &__links {
+        @include sm {
+            margin-top: 32px;
+        }
+    }
+
+    &__link {
+        margin-right: 32px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+}
