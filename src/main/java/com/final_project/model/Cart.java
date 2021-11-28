@@ -1,7 +1,9 @@
 package com.final_project.model;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Cart implements Serializable {
     private ArrayList<LineItem> items;
@@ -16,6 +18,19 @@ public class Cart implements Serializable {
 
     public int getCount() {
         return items.size();
+    }
+
+    public double getTotal() {
+        double total = 0;
+        for (LineItem item : this.items) {
+            total += item.getTotal();
+        }
+        return total;
+    }
+
+    public String getTotalCurrencyFormat() {
+        NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
+        return currency.format(this.getTotal());
     }
 
     public void addItem(LineItem item) {

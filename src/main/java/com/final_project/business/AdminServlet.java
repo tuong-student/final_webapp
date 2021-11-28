@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.final_project.data.*;
 import com.final_project.model.*;
 
+@WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,7 +21,7 @@ public class AdminServlet extends HttpServlet {
         session.setAttribute("user_list", users);
         session.setAttribute("product_list", products);
 
-        getServletContext().getRequestDispatcher("/admin_products.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/view/admin_products.jsp").forward(req, resp);
     }
 
     @Override
