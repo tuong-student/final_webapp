@@ -14,38 +14,29 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         
-        // int productID = Integer.parseInt(request.getParameter("productID"));
-        // Product product =new Product();
-        // product = ProductDAO.selectProduct(productID);
+        int productID = Integer.parseInt(request.getParameter("productID"));
+        Product product =new Product();
+        product = ProductDAO.selectProduct(productID);
         
         PrintWriter out = response.getWriter();
         String name = request.getParameter("pname");
         String description = request.getParameter("pdescription");
-     
-        try{
-            int quantity = Integer.parseInt(request.getParameter("pquantity"));
-        }
-        catch (Exception e){
-            out.println("quan fall");
-        }
-        try{
-             float price = Float.parseFloat(request.getParameter("pprice"));
-        }
-        catch (Exception e){
-            out.println("price fall");
-        }
-        
-        
-        // PrintWriter out = response.getWriter();
+        int quantity = Integer.parseInt(request.getParameter("pquantity"));
+        float price = Float.parseFloat(request.getParameter("pprice"));
 
-        // try{
-        //     ProductDAO.update(product); 
-        //     out.println("Update success!!"); 
-        // }catch (Exception e) {
-        //     System.out.println("Update fail!!");
-        // }
+        try{
+            product.setName(name);
+            product.setDescription(description);
+            product.setPrice(price);
+            product.setQuantity(quantity);
 
-        // request.getRequestDispatcher("/AdminServlet").forward(request, response);
+            ProductDAO.update(product); 
+            out.println("Update success!!"); 
+        }catch (Exception e) {
+            System.out.println("Update fail!!");
+        }
+
+        request.getRequestDispatcher("/AdminServlet").forward(request, response);
     }
     
     

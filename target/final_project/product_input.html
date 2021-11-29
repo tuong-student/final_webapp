@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form action="ProductServlet" method="post" enctype="multipart/form-data">
+    <form action="ProductServlet" method="get" enctype="multipart/form-data">
         <div id="box">
             <div id="title">
                 <h1>Adding Product</h1>
@@ -24,12 +24,12 @@
 
                 <div class="infobox">
                     <label>Price</label>
-                    <input type="number" name="price" placeholder="Input product price">
+                    <input type="text" name="price" placeholder="Input product price">
                 </div>
 
                 <div class="infobox">
                     <label>Quantity</label>
-                    <input type="number" name="quantity" placeholder="Input product quatity">  
+                    <input type="text" name="quantity" placeholder="Input product quatity">  
                 </div>
 
                 <div class="infobox"> 
@@ -43,9 +43,8 @@
 
                 <input type="hidden" name="action" value="addProduct">
                 <button type="submit"> Add </button>
-            </div>
+            </div>   
         </div>
-        
     </form>
 </body>
 
