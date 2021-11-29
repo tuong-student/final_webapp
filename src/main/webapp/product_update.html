@@ -10,15 +10,15 @@
 </head>
 
 <body>
-    <form action="UpdateServlet" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="action" value="updateProduct">
-    <input type="hidden" name="productID" value="${product.getID()}">
+    <form action="UpdateServlet" method="get" enctype="multipart/form-data">
         <div id="box">
             <div id="title">
                 <h1>Update Product</h1>
             </div>
-           
+            
             <div class="info" id="info">
+                <input type="hidden" name="action" value="updateProduct">
+               
                 <div class="infobox">
                     <label>Name </label>
                     <input  type="text" name="pname" placeholder="Input product name">   
@@ -26,12 +26,12 @@
 
                 <div class="infobox">
                     <label>Prize</label>
-                    <input type="number" name="pprice" placeholder="Input product price">
+                    <input type="text" name="pprice" placeholder="Input product price">
                 </div>
 
                 <div class="infobox">
                     <label>Quantity</label>
-                    <input type="number" name="pquantity" placeholder="Input product quatity">  
+                    <input type="text" name="pquantity" placeholder="Input product quatity">  
                 </div>
 
 

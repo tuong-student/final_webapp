@@ -17,6 +17,7 @@ public class AdminServlet extends HttpServlet
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
+        
         List<User> users = UserDAO.selectAllUsers();
         List<Product> products = ProductDAO.selectAllProduct();
         HttpSession session = req.getSession();

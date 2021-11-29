@@ -50,9 +50,12 @@
                                     <input type="hidden" name="productID" value="${product.getID()}">
                                     <button class="deleteButton" title="submit">Delete</button>
                                 </form>
-
-                                <button class="updateButton"  onclick="document.location='product_update.html'">Update Product</button>
                                 
+                                <form action="UpdateServlet" method="post">
+                                    <input type="hidden" name="action" value="product_update"> 
+                                    <input type="hidden" name="productID" value="${product.getID()}">
+                                    <button class="updateButton" title="submit" >Update Product</button>
+                                </form>
                             </div>
                         </li>
                     </c:forEach>

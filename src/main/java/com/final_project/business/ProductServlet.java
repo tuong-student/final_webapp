@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.io.*;
 import javax.servlet.*;
-
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -13,6 +13,7 @@ import com.final_project.data.*;
 import com.final_project.model.*;
 
 @WebServlet("/ProductServlet")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024* 100)
 public class ProductServlet extends HttpServlet 
 {
     @Override
