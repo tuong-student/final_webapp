@@ -4,6 +4,8 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.io.Serializable;
 
+import javax.imageio.ImageIO;
+import javax.mail.Part;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,25 +23,25 @@ public class Product implements Serializable {
     private int id;
     private String name;
     private String description;
-    private String type;
     private int quantity;
     private float price;
+    
 
     public Product() {
         super();
         name = "";
         description = "";
-        type = "";
+      
         quantity = 0;
         price = 0;
     }
 
-    public Product(int id, String name, String description, String type, int quantity, int price) {
+    public Product(int id, String name, String description, int quantity, int price) {
         super();
         this.id = id;
         this.name = name;
         this.description = description;
-        this.type = type;
+    
         this.quantity = quantity;
         this.price = price;
     }
@@ -68,14 +70,7 @@ public class Product implements Serializable {
         return this.description;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
+ 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }

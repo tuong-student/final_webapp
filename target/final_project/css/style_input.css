@@ -1,0 +1,48 @@
+#title
+{
+    
+    border-top-left-radius: 15px;
+    border-top-right-radius:15px ;
+    background-color: rgba(34, 156, 212, 0.808);
+}
+h1
+{
+    
+    margin-left: 30%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.infobox
+{
+    margin: 5%;
+    position: relative;
+    width: 100%;
+}
+input
+{  
+    position: absolute;
+    right: 20%;
+    top: 1%;
+    width: 40%;
+}
+
+#info
+{
+    
+    
+    font-family: Arial, Helvetica, sans-serif;
+}
+#box
+{   
+    margin-left:30% ;
+    border-radius: 10%;
+    width: 40%;
+    height: 50%;
+    background-color: gainsboro;
+}
+
+button
+{ 
+    margin-top: 4%;
+    margin-left: 80%; 
+    margin-bottom:2% ;
+}

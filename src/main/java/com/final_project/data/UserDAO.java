@@ -49,7 +49,8 @@ public class UserDAO {
         String qString = "SELECT u FROM User u " + "WHERE u.email = :email";
         TypedQuery<User> q = em.createQuery(qString, User.class);
         q.setParameter("email", email);
-        try {
+        try 
+        {
             User user = q.getSingleResult();
             System.out.println("Select success!!");
             return user;

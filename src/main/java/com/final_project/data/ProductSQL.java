@@ -20,9 +20,9 @@ public class ProductSQL {
                 // Hibernate setting
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                settings.put(Environment.URL, "jdbc:sqlserver://DESKTOP-FA7STRC\\SQLSERVER2019;databaseName=final_web");
+                settings.put(Environment.URL, "jdbc:sqlserver://localhost;databaseName=UserTest");
                 settings.put(Environment.USER, "sa");
-                settings.put(Environment.PASS, "1");
+                settings.put(Environment.PASS, "huynhcongdat123");
                 settings.put(Environment.HBM2DDL_AUTO, "update");
 
                 settings.put(Environment.SHOW_SQL, "true");

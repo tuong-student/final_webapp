@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>HomeController</servlet-name>
-    <servlet-class>com.final_project.controller.HomeController</servlet-class>
+    <servlet-class>com.final_project.business.AdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HomeController</servlet-name>
@@ -14,7 +14,6 @@
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>admin_products.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 </web-app>

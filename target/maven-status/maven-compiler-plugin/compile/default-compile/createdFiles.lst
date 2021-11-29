@@ -6,6 +6,7 @@ com\final_project\data\UserDAO.class
 com\final_project\data\JavaMailUtil.class
 com\final_project\data\JavaMailUtil$1.class
 com\final_project\business\CartProduct.class
+com\final_project\business\UpdateServlet.class
 com\final_project\model\Cart.class
 com\final_project\data\ProductDAO.class
 com\final_project\business\JavaEmailServlet.class
