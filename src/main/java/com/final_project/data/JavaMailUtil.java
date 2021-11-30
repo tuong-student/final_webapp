@@ -10,7 +10,7 @@ import com.final_project.model.*;
 public class JavaMailUtil {
 
     public static void sendEmail(String reception, int code, HttpServletRequest request) throws MessagingException {
-        String mail_action = request.getSession().getAttribute("mail_action").toString();
+        String mail_action = request.getAttribute("mail_action").toString();
         Properties properties = new Properties();
 
         properties.put("mail.smtp.auth", "true");
@@ -35,8 +35,13 @@ public class JavaMailUtil {
         if (mail_action.equals("checkout")) {
             Cart cart = (Cart) request.getSession().getAttribute("cart");
             String total = cart.getTotalCurrencyFormat();
-            Message message = prepareMessageCheckout(session, myAccount, reception, code, total);
-            Transport.send(message);
+            if (reception.equals(myAccount)) {
+                Message message = prepareMessageCheckoutAdmin(session, myAccount, reception, total, request);
+                Transport.send(message);
+            } else {
+                Message message = prepareMessageCheckout(session, myAccount, reception, code, total);
+                Transport.send(message);
+            }
         }
     }
 
@@ -65,6 +70,33 @@ public class JavaMailUtil {
             message.setSubject("Your Checkout Code");
             String htmlCode = "<h2>This is your code</h2> </br> <h1>" + code
                     + "<h1></br><h2>This is the amound you have to pay</h2> </br> <h1>" + total + "</h1>";
+            message.setContent(htmlCode, "text/html");
+            System.out.println("Java mail success!!!");
+            return message;
+        } catch (Exception e) {
+            System.out.println("Java mail fail!!!");
+        }
+        return null;
+    }
+
+    private static Message prepareMessageCheckoutAdmin(Session session, String myAccount, String reception,
+            String total, HttpServletRequest request) {
+        try {
+            String code = request.getParameter("code");
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String payment_method = request.getParameter("payment_method");
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccount));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(reception));
+            message.setSubject("Your Checkout Code");
+            // message for admin
+            String htmlCode = "<h1>Payment method: " + payment_method
+                    + "</h1></br><h2>This is user code:</h2> </br> <h1>" + code
+                    + "</h1></br><h2>This is the uers's bill:</h2> </br> <h1>" + total + "</h1>"
+                    + "</br><h2>This is the uers's information</h2> </br>"
+                    + "<p>name: </p>" + name
+                    + "</br><p>email: </p>" + email;
             message.setContent(htmlCode, "text/html");
             System.out.println("Java mail success!!!");
             return message;

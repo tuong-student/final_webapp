@@ -8,3 +8,77 @@
 .likelink:hover {
     text-decoration: underline !important;
 }
+
+.title {
+    text-align: center;
+}
+
+.content_area {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.info_form {
+    max-width: 100%;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+.small_area {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form_input.base {
+    display: block;
+    margin-bottom: 12px;
+    width: 240px;
+}
+
+.input_area {
+    background-color: #f4f4f4;
+    padding-top: 10px;
+}
+
+.input_area h3 {
+    padding-left: 8px;
+    display: inline-block;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.input_area p {
+    margin: 0;
+    padding-left: 8px;
+}
+
+.btn_area {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    background: none repeat scroll 0 0 #5a88ca;
+    border: medium none;
+    color: #fff;
+    padding: 11px 20px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #000;
+}
+
+.text_code {
+    text-align: center;
+}
+
+.button {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.button:hover {
+    color: white;
+}

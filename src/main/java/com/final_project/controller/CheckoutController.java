@@ -15,38 +15,34 @@ public class CheckoutController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String payment_method = request.getParameter("payment_method");
-
-        if (payment_method.equals("momo") || payment_method.equals("vnpay")) {
-            String myEmail = "demoshop271@gmail.com";
-            request.getSession().setAttribute("mail_action", "checkout");
-            int code = getRandomCode(100000, 900000);
-            PrintWriter out = response.getWriter();
-            if (payment_method.equals("momo")) {
-                try {
-                    String email = request.getParameter("email");
-                    JavaMailUtil.sendEmail(email, code, request);
-                    JavaMailUtil.sendEmail(myEmail, code, request);
-                } catch (MessagingException e) {
-                    out.println(request.getParameter("email"));
-                    out.println(e);
-                    e.printStackTrace();
+        String action = request.getParameter("action");
+        if (action != null) {
+            try {
+                request.setAttribute("mail_action", "checkout");
+                String email = request.getParameter("email");
+                String myEmail = "demoshop271@gmail.com";
+                int code = Integer.parseInt(request.getParameter("code"));
+                JavaMailUtil.sendEmail(email, code, request);
+                JavaMailUtil.sendEmail(myEmail, code, request);
+                request.setAttribute("message",
+                        "Send your payment code and money to this momo to complete the transaction || Shop momo: 0398149100 || Thanks you for your payment!!!");
+                if (payment_method.equals("vnpay")) {
+                    response.sendRedirect("https://sandbox.vnpayment.vn/tryitnow/Home/CreateOrder");
+                    return;
                 }
+            } catch (MessagingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-            if (payment_method.equals("vnpay")) {
-                try {
-                    String email = request.getParameter("emailvnpay");
-                    JavaMailUtil.sendEmail(email, code, request);
-                    JavaMailUtil.sendEmail(myEmail, code, request);
-                } catch (MessagingException e) {
-                    out.println(request.getParameter("email"));
-                    out.println(e);
-                    e.printStackTrace();
-                }
-                response.sendRedirect("https://sandbox.vnpayment.vn/tryitnow/Home/CreateOrder");
-                return;
+
+        } else {
+            if (payment_method.equals("momo") || payment_method.equals("vnpay")) {
+                int code = getRandomCode(1000, 9000);
+                request.getSession().setAttribute("code", code);
+                request.getSession().setAttribute("payment_method", payment_method);
             }
         }
-        getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+        getServletContext().getRequestDispatcher("/checkagain.jsp").forward(request, response);
     }
 
     private int getRandomCode(int min, int max) {

@@ -223,15 +223,18 @@
                                                     <input type="submit" value="x" class="btn likelink">
                                                 </td>
                                             </form>
-
-                                            <td class="product-thumbnail">
-                                                <a href="single-product.jsp"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/${item.getProduct().getImageName()}"></a>
-                                            </td>
-
-                                            <td class="product-name">
-                                                <a href="single-product.jsp">${item.getProduct().getName()}</a> 
-                                            </td>
-
+                                            <form id="${item.getProduct().getID()}" action="DetailController" method="post">
+                                                <input type="hidden" name="product_id" value="${item.getProduct().getID()}">
+                                                <td class="product-thumbnail">
+                                                    <a href="javascript:$('#${item.getProduct().getID()}').submit();"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/${item.getProduct().getImageName()}"></a>
+                                                </td>
+                                            
+                                            
+                                                <input type="hidden" name="product_id" value="${item.getProduct().getID()}">
+                                                <td class="product-name">
+                                                    <a href="javascript:$('#${item.getProduct().getID()}').submit();">${item.getProduct().getName()}</a> 
+                                                </td>
+                                            </form>
                                             <td class="product-price">
                                                 <span class="amount">${item.getProduct().getPriceCurrencyFormat()}</span> 
                                             </td>
