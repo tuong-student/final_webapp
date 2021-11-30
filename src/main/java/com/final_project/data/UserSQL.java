@@ -20,9 +20,10 @@ public class UserSQL {
                 // Hibernate setting
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                settings.put(Environment.URL, "jdbc:sqlserver://DESKTOP-FA7STRC\\SQLSERVER2019;databaseName=final_web");
-                settings.put(Environment.USER, "sa");
-                settings.put(Environment.PASS, "1");
+                settings.put(Environment.URL,
+                        "jdbc:sqlserver://SQL5080.site4now.net;databaseName=db_a7c9ad_demoshop271");
+                settings.put(Environment.USER, "db_a7c9ad_demoshop271_admin");
+                settings.put(Environment.PASS, "demoshop271");
                 settings.put(Environment.HBM2DDL_AUTO, "update");
 
                 settings.put(Environment.SHOW_SQL, "true");

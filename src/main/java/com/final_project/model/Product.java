@@ -24,6 +24,7 @@ public class Product implements Serializable {
     private String type;
     private int quantity;
     private float price;
+    private String imageName;
 
     public Product() {
         super();
@@ -32,9 +33,10 @@ public class Product implements Serializable {
         type = "";
         quantity = 0;
         price = 0;
+        imageName = "";
     }
 
-    public Product(int id, String name, String description, String type, int quantity, int price) {
+    public Product(int id, String name, String description, String type, int quantity, int price, String imageName) {
         super();
         this.id = id;
         this.name = name;
@@ -42,6 +44,7 @@ public class Product implements Serializable {
         this.type = type;
         this.quantity = quantity;
         this.price = price;
+        this.imageName = imageName;
     }
 
     public void setID(int id) {
@@ -90,6 +93,14 @@ public class Product implements Serializable {
 
     public float getPrice() {
         return this.price;
+    }
+
+    public String getImageName() {
+        return this.imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public String getPriceCurrencyFormat() {

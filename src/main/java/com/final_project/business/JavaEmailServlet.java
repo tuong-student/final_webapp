@@ -16,8 +16,9 @@ public class JavaEmailServlet extends HttpServlet {
         String reception = req.getParameter("email");
         try {
             int code = getRandomCode(1000, 9000);
-            JavaMailUtil.sendEmail(reception, code);
             req.getSession().setAttribute("code", code);
+            req.getSession().setAttribute("mail_action", "reset");
+            JavaMailUtil.sendEmail(reception, code, req);
             getServletContext().getRequestDispatcher("/reset_code.html").forward(req, resp);
         } catch (MessagingException e) {
             System.out.println("JavaEmailServlet fail!!!");
@@ -26,7 +27,7 @@ public class JavaEmailServlet extends HttpServlet {
         }
     }
 
-    protected int getRandomCode(int min, int max) {
+    private int getRandomCode(int min, int max) {
         int range = (max - min) + 1;
         int code = (int) (Math.random() * range) + min;
         return code;

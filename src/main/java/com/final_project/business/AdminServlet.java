@@ -20,8 +20,26 @@ public class AdminServlet extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user_list", users);
         session.setAttribute("product_list", products);
-
-        getServletContext().getRequestDispatcher("/view/admin_products.jsp").forward(req, resp);
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "Adminpage";
+        }
+        if (action.equals("Adminpage")) {
+            resp.sendRedirect("admin_products.jsp");
+        } else {
+            if (action.equals("deleteUser")) {
+                resp.sendRedirect("admin_customers.jsp");
+            }
+            if (action.equals("updateProduct")) {
+                resp.sendRedirect("admin_products.jsp");
+            }
+            if (action.equals("deleteProduct")) {
+                resp.sendRedirect("admin_products.jsp");
+            }
+            if (action.equals("addProduct")) {
+                resp.sendRedirect("admin_products.jsp");
+            }
+        }
     }
 
     @Override

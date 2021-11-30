@@ -14,20 +14,22 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             String action = req.getParameter("action");
-
             if (action.equals("login")) {
                 String email = req.getParameter("email");
                 String password = req.getParameter("password");
                 String message = "Enter your email!!";
                 // defaul url
-                String url = "/trang_chu.html";
+                String url = "/index.html";
                 // if email exist then check if password is correct
                 if (UserDAO.emailExists(email)) {
                     if (UserDAO.passwordExists(email, password)) {
                         User user = new User();
                         user = UserDAO.selectUser(email);
-                        url = "/trang_chu.html";
-                        req.setAttribute("user", user);
+                        req.getSession().setAttribute("user", user);
+                        if (email.equals("demoshop271@gmail.com")) {
+                            resp.sendRedirect("AdminServlet");
+                            return;
+                        }
                     } else {
                         System.out.println("Wrong password");
                         message = "Wrong password!";
@@ -50,7 +52,8 @@ public class LoginController extends HttpServlet {
                 // if password and re_password is the same, go to EmailInsertServlet
                 if (password.equals(re_password)) {
                     url = "/EmailInsertServlet";
-                    getServletContext().getRequestDispatcher(url).forward(req, resp);
+                    req.getRequestDispatcher(url).forward(req, resp);
+                    return;
                 } else {
                     // is the password and re_password not the same, re_input the information
                     String message = "password not same";
@@ -59,8 +62,8 @@ public class LoginController extends HttpServlet {
                 getServletContext().getRequestDispatcher(url).forward(req, resp);
             }
             if (action.equals("forgot_password")) {
-                String url = "JavaEmailServlet";
-                resp.sendRedirect(url);
+                String url = "/JavaEmailServlet";
+                req.getRequestDispatcher(url).forward(req, resp);
             }
             if (action.equals("reset_code")) {
                 // get information form the form
@@ -97,7 +100,12 @@ public class LoginController extends HttpServlet {
             PrintWriter out = resp.getWriter();
             System.out.println(e);
             System.out.println("LoginController Fail!!!");
-            out.println("EmailController Faill!!!");
+            out.println("LoginController Faill!!!");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        doPost(req, resp);
     }
 }

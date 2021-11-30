@@ -1,0 +1,10 @@
+.btn.likelink {
+    background: none !important;
+    padding: 0;
+    margin: 0;
+    color: #5a88ca !important;
+}
+
+.likelink:hover {
+    text-decoration: underline !important;
+}

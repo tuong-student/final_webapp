@@ -16,10 +16,10 @@ public class CartController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // get information from form
-        String url = req.getParameter("url"); // url of the page send request
         String action = req.getParameter("action");
+        String url = req.getParameter("url"); // url of the page send request
         int product_id = Integer.parseInt(req.getParameter("product_id"));
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
 
         // creat object
         Cart cart = (Cart) session.getAttribute("cart");
@@ -42,12 +42,18 @@ public class CartController extends HttpServlet {
         }
 
         // creat LineItem and add if action == add, else delete
+        // if (action.equals("+")) {
+        // LineQuantity += 1;
+        // }
+        // if (action.equals("-")) {
+        // LineQuantity -= 1;
+        // }
         LineItem.setProduct(product);
         LineItem.setQuantity(LineQuantity);
-        if (action.equals("add")) {
+        if (LineQuantity > 0) {
             cart.addItem(LineItem);
         }
-        if (action.equals("delete")) {
+        if (LineQuantity == 0 || action.equals("remove")) {
             cart.removeItem(LineItem);
         }
 

@@ -25,6 +25,7 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/base.css">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/owl.carousel.css">
@@ -49,8 +50,8 @@
                             <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.jsp"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                            <li><a href="checkout.jsp"><i class="fa fa-user"></i> Checkout</a></li>
+                            <li><a href="login.html"><i class="fa fa-user"></i> Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -93,7 +94,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.jsp">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="cart.jsp">Cart - <span class="cart-amunt">${cart.getTotalCurrencyFormat()}</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">${cart.getCount()}</span></a>
                     </div>
                 </div>
             </div>
@@ -114,10 +115,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="shop.html">Shop page</a></li>
-                        <li><a href="single-product.html">Single product</a></li>
+                        <li class="active"><a href="shop.jsp">Shop page</a></li>
+                        <li><a href="single-product.jsp">Single product</a></li>
                         <li><a href="cart.jsp">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="checkout.jsp">Checkout</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
@@ -147,23 +148,26 @@
                 <c:forEach var="product" items="${product_list}">
                     <div class="col-md-3 col-sm-6">
                         <div class="single-shop-product">
-                        <form action="CartController" method="post">
-                            <input type="hidden" name="action" value="add">
-                            <input type="hidden" name="product_id" value="${product.getID()}">
-                            <input type="hidden" name="line_quantity" value="1">
-                            <input type="hidden" name="url" value="${pageContext.request.contextPath}/shop.jsp">
-                            <div class="product-upper">
-                                <img src="img/product-2.jpg" alt="">
-                            </div>
-                            <h2><a href="">${product.getName()}</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>${product.getPrice()}</ins> <del>${product.getPrice()}</del>
-                            </div>  
                             
-                            <div class="product-option-shop">
-                                <button class="add_to_cart_button" type="submit">Add to cart</button>
-                            </div>                       
-                        </form>
+                            <div class="product-upper" style="height: 200px;">
+                                <img style="max-height: 100%" src="img/${product.getImageName()}" alt="${product.getImageName()}">
+                            </div>
+                            <form action="DetailController" method="post">
+                                <input type="hidden" name="product_id" value="${product.getID()}">
+                                <h2><input class="likelink btn" style="width: 100%;" type="submit" value="${product.getName()}"></h2>
+                            </form>
+                            <div class="product-carousel-price">
+                                <ins>${product.getPriceCurrencyFormat()}</ins>
+                            </div>  
+                            <form action="CartController" method="post">
+                                <input type="hidden" name="action" value="add">
+                                <input type="hidden" name="product_id" value="${product.getID()}">
+                                <input type="hidden" name="line_quantity" value="1">
+                                <input type="hidden" name="url" value="${pageContext.request.contextPath}/shop.jsp">
+                                <div class="product-option-shop">
+                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
+                                </div>                       
+                            </form>
                         </div>
                     </div>
                 </c:forEach>
