@@ -95,8 +95,8 @@ public class JavaMailUtil {
                     + "</h1></br><h2>This is user code:</h2> </br> <h1>" + code
                     + "</h1></br><h2>This is the uers's bill:</h2> </br> <h1>" + total + "</h1>"
                     + "</br><h2>This is the uers's information</h2> </br>"
-                    + "<p>name: </p>" + name
-                    + "</br><p>email: </p>" + email;
+                    + "<h3>name: " + name + "</h3>"
+                    + "</br><h3>email: " + email + "</h3>";
             message.setContent(htmlCode, "text/html");
             System.out.println("Java mail success!!!");
             return message;

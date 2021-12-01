@@ -13,6 +13,15 @@
     text-align: center;
 }
 
+.error {
+    color: red;
+    text-shadow: 2px 1px 1px #000;
+}
+
+.return_btn {
+    width: 100%;
+}
+
 .content_area {
     width: 800px;
     margin: 0 auto;

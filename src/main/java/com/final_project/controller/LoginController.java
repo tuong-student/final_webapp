@@ -31,6 +31,7 @@ public class LoginController extends HttpServlet {
                             resp.sendRedirect("AdminServlet");
                             return;
                         }
+                        req.getSession().setAttribute("user", user);
                     } else {
                         System.out.println("Wrong password");
                         message = "Wrong password!";
