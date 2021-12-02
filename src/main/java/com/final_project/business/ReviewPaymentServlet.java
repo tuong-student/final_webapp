@@ -29,7 +29,6 @@ public class ReviewPaymentServlet extends HttpServlet {
             String url = "checkagainPaypal.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
             req.getRequestDispatcher(url).forward(req, resp);
         } catch (PayPalRESTException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             req.setAttribute("errorMessage", e.getMessage());
             req.getRequestDispatcher("error.jsp").forward(req, resp);

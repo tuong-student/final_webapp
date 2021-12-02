@@ -2,7 +2,6 @@ package com.final_project.business;
 
 import java.io.*;
 import javax.servlet.*;
-import javax.servlet.GenericServlet;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -49,6 +48,8 @@ public class EmailInsertServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("Insert Servlet fail!!!");
             System.out.println(e);
+            req.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
         }
     }
 

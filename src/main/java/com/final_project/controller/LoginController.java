@@ -1,7 +1,8 @@
 package com.final_project.controller;
 
 import java.io.*;
-import javax.servlet.*;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -11,7 +12,7 @@ import com.final_project.model.*;
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             String action = req.getParameter("action");
 
@@ -99,15 +100,15 @@ public class LoginController extends HttpServlet {
             }
 
         } catch (Exception e) {
-            PrintWriter out = resp.getWriter();
             System.out.println(e);
             System.out.println("LoginController Fail!!!");
-            out.println("LoginController Faill!!!");
+            req.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         doPost(req, resp);
     }
 }

@@ -14,10 +14,18 @@ import com.final_project.data.*;
 public class HomeController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> products = ProductDAO.selectAllProduct();
-        HttpSession session = request.getSession();
-        session.setAttribute("product_list", products);
-        response.sendRedirect("index.html");
+        try {
+            List<Product> products = ProductDAO.selectAllProduct();
+            Product p = products.get(0);
+            HttpSession session = request.getSession();
+            session.setAttribute("product_list", products);
+            session.setAttribute("p", p);// default single_product
+            response.sendRedirect("index.html");
+        } catch (Exception e) {
+            System.out.println(e);
+            request.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
+        }
     }
 
     @Override

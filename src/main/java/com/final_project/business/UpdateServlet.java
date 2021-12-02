@@ -46,6 +46,8 @@ public class UpdateServlet extends HttpServlet {
             // TODO: handle exception
             out.println("Update fail!!");
             out.println(e);
+            request.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
         }
 
     }

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -22,7 +21,7 @@ import com.final_project.model.*;
         * 100)
 public class ProductInsertServlet extends HttpServlet {
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -41,12 +40,13 @@ public class ProductInsertServlet extends HttpServlet {
             response.sendRedirect("product_input.html");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            out.println("ProductServlet Fail!!");
+            request.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doGet(request, response);
     }
 

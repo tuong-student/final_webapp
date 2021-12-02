@@ -23,7 +23,8 @@ public class JavaEmailServlet extends HttpServlet {
         } catch (MessagingException e) {
             System.out.println("JavaEmailServlet fail!!!");
             System.out.println(e);
-            e.printStackTrace();
+            req.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
         }
     }
 

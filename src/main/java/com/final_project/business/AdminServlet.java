@@ -15,30 +15,36 @@ import com.final_project.model.*;
 public class AdminServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> users = UserDAO.selectAllUsers();
-        List<Product> products = ProductDAO.selectAllProduct();
-        HttpSession session = req.getSession();
-        session.setAttribute("user_list", users);
-        session.setAttribute("product_list", products);
-        String action = req.getParameter("action");
-        if (action == null) {
-            action = "Adminpage";
-        }
-        if (action.equals("Adminpage")) {
-            resp.sendRedirect("admin_products.jsp");
-        } else {
-            if (action.equals("deleteUser")) {
-                resp.sendRedirect("admin_customers.jsp");
+        try {
+            List<User> users = UserDAO.selectAllUsers();
+            List<Product> products = ProductDAO.selectAllProduct();
+            HttpSession session = req.getSession();
+            session.setAttribute("user_list", users);
+            session.setAttribute("product_list", products);
+            String action = req.getParameter("action");
+            if (action == null) {
+                action = "Adminpage";
             }
-            if (action.equals("updateProduct")) {
+            if (action.equals("Adminpage")) {
                 resp.sendRedirect("admin_products.jsp");
+            } else {
+                if (action.equals("deleteUser")) {
+                    resp.sendRedirect("admin_customers.jsp");
+                }
+                if (action.equals("updateProduct")) {
+                    resp.sendRedirect("admin_products.jsp");
+                }
+                if (action.equals("deleteProduct")) {
+                    resp.sendRedirect("admin_products.jsp");
+                }
+                if (action.equals("addProduct")) {
+                    resp.sendRedirect("admin_products.jsp");
+                }
             }
-            if (action.equals("deleteProduct")) {
-                resp.sendRedirect("admin_products.jsp");
-            }
-            if (action.equals("addProduct")) {
-                resp.sendRedirect("admin_products.jsp");
-            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            req.setAttribute("errorMessage", e.getMessage());
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
         }
     }
 

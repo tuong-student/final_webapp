@@ -1,7 +1,6 @@
 package com.final_project.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
@@ -10,9 +9,7 @@ import javax.servlet.http.*;
 
 import com.final_project.data.*;
 import com.final_project.model.*;
-import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
-import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 
 @WebServlet("/CheckoutController")
@@ -21,11 +18,24 @@ public class CheckoutController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String payment_method = request.getParameter("payment_method");
         String action = request.getParameter("action");
+        User user = (User) request.getSession().getAttribute("user");
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
 
         if (action != null) {
             try {
+
                 request.setAttribute("mail_action", "checkout");
                 String email = request.getParameter("email");
+                double money = Double.parseDouble(request.getParameter("money"));
+                // check information
+                if (email.equals(user.getemail()) || money == cart.getTotal()) {
+                    // do nothing
+                } else {
+                    String message = "Wrong input!!";
+                    request.setAttribute("message", message);
+                    request.getRequestDispatcher("/checkagain.jsp").forward(request, response);
+                    return;
+                }
                 String myEmail = "demoshop271@gmail.com";
                 int code = Integer.parseInt(request.getParameter("code"));
                 JavaMailUtil.sendEmail(email, code, request);
@@ -51,6 +61,8 @@ public class CheckoutController extends HttpServlet {
             } catch (MessagingException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                request.setAttribute("errorMessage", e.getMessage());
+                getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
             } catch (PayPalRESTException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
