@@ -31,7 +31,6 @@ public class LoginController extends HttpServlet {
                             resp.sendRedirect("AdminServlet");
                             return;
                         }
-                        req.getSession().setAttribute("user", user);
                     } else {
                         System.out.println("Wrong password");
                         message = "Wrong password!";
@@ -71,7 +70,7 @@ public class LoginController extends HttpServlet {
                 // get information form the form
                 String otp = req.getParameter("otp");
                 String code = req.getSession().getAttribute("code").toString();
-                String url = "/reset_password.html";
+                String url = "/reset_password.html";// default url
                 // if the otp is the same as the code, go to the reset_password page
                 if (otp.equals(code)) {
                     getServletContext().getRequestDispatcher(url).forward(req, resp);
@@ -94,6 +93,7 @@ public class LoginController extends HttpServlet {
                     // is the password and re_password not the same, re_input the information
                     String message = "password not same";
                     req.setAttribute("message", message);
+                    url = "/reset_password.jsp";
                 }
                 getServletContext().getRequestDispatcher(url).forward(req, resp);
             }

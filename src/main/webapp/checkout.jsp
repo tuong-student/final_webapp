@@ -959,6 +959,7 @@
 
                                                     <div id="payment">
                                                         <form action="CheckoutController" method="post">
+                                                            <input type="hidden" name="url" value="${pageContext.request.contextPath}">
                                                             <ul class="payment_methods methods">
                                                                 <li class="payment_method_bacs">
                                                                     <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">

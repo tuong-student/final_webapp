@@ -1,5 +1,3 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "editor.minimap.enabled": false,
-    "maven.view": "hierarchical"
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

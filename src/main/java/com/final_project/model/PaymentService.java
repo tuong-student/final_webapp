@@ -88,9 +88,9 @@ public class PaymentService {
 
     private RedirectUrls getRedirectUrls(HttpServletRequest request) {
         RedirectUrls redirectUrls = new RedirectUrls();
-        String baseURL = request.getContextPath().toString();
-        redirectUrls.setCancelUrl("https://webcuoiky.herokuapp.com/checkout.jsp");
-        redirectUrls.setReturnUrl("https://webcuoiky.herokuapp.com/ReviewPaymentServlet");
+        String baseURL = "http://localhost:8080/final_project/";
+        redirectUrls.setCancelUrl(baseURL + "/checkout.jsp");
+        redirectUrls.setReturnUrl(baseURL + "/ReviewPaymentServlet");
         return redirectUrls;
     }
 

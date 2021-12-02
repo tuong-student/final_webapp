@@ -1,7 +1,5 @@
 package com.final_project.model;
 
-import java.util.List;
-
 public class OrderDetail {
     private double total;
     private double shipping;

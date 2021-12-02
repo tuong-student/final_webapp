@@ -65,8 +65,10 @@ public class CheckoutController extends HttpServlet {
                 request.getSession().setAttribute("payment_method", payment_method);
             }
             if (payment_method.equals("paypal")) {
+                String baseURL = request.getParameter("url");
                 int code = getRandomCode(1000, 9000);
                 request.getSession().setAttribute("code", code);
+                request.getSession().setAttribute("baseURL", baseURL);
                 request.getSession().setAttribute("payment_method", payment_method);
                 request.getRequestDispatcher("AuthorizePaymentServlet").forward(request, response);
                 return;

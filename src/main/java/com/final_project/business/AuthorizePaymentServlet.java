@@ -14,7 +14,6 @@ import com.paypal.base.rest.PayPalRESTException;
 public class AuthorizePaymentServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        PrintWriter out = resp.getWriter();
         HttpSession session = req.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
         User user = (User) session.getAttribute("user");
