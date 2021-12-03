@@ -18,6 +18,7 @@
                 <div class="web_container">
                     <div class="content_area">
                         <h1 class="title">Please Check Again and input your information</h1>
+                        <h2>${messageer}</h2>
                         <form action="CheckoutController" class="info_form">
                             <input type="hidden" name="action" value="accept_payment">
                             <input type="hidden" name="payment_method" value="${payment_method}">

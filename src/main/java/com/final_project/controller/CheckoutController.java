@@ -18,8 +18,12 @@ public class CheckoutController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String payment_method = request.getParameter("payment_method");
         String action = request.getParameter("action");
-        User user = (User) request.getSession().getAttribute("user");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+            return;
+        }
 
         if (action != null) {
             try {
@@ -28,11 +32,11 @@ public class CheckoutController extends HttpServlet {
                 String email = request.getParameter("email");
                 double money = Double.parseDouble(request.getParameter("money"));
                 // check information
-                if (email.equals(user.getemail()) || money == cart.getTotal()) {
+                if (email.equals(user.getemail()) && money == cart.getTotal()) {
                     // do nothing
                 } else {
                     String message = "Wrong input!!";
-                    request.setAttribute("message", message);
+                    request.setAttribute("messageer", message);
                     request.getRequestDispatcher("/checkagain.jsp").forward(request, response);
                     return;
                 }
