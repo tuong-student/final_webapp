@@ -18,6 +18,8 @@ public class ReviewPaymentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String paymentId = req.getParameter("paymentId");
         String payerId = req.getParameter("PayerID");
+        req.getSession().setAttribute("paymentId", paymentId);
+        req.getSession().setAttribute("PayerID", payerId);
 
         try {
             PaymentService paymentService = new PaymentService();

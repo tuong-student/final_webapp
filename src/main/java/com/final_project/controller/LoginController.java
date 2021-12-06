@@ -66,6 +66,7 @@ public class LoginController extends HttpServlet {
             if (action.equals("forgot_password")) {
                 String url = "/JavaEmailServlet";
                 req.getRequestDispatcher(url).forward(req, resp);
+                return;
             }
             if (action.equals("reset_code")) {
                 // get information form the form

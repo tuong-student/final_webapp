@@ -37,8 +37,13 @@ public class CheckoutController extends HttpServlet {
                 } else {
                     String message = "Wrong input!!";
                     request.setAttribute("messageer", message);
-                    request.getRequestDispatcher("/checkagain.jsp").forward(request, response);
-                    return;
+                    if (payment_method.equals("paypal")) {
+                        request.getRequestDispatcher("/checkagainPaypal.jsp").forward(request, response);
+                        return;
+                    } else {
+                        request.getRequestDispatcher("/checkagain.jsp").forward(request, response);
+                        return;
+                    }
                 }
                 String myEmail = "demoshop271@gmail.com";
                 int code = Integer.parseInt(request.getParameter("code"));

@@ -14,10 +14,11 @@ public class JavaEmailServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String reception = req.getParameter("email");
+        System.out.println(reception);
         try {
             int code = getRandomCode(1000, 9000);
             req.getSession().setAttribute("code", code);
-            req.getSession().setAttribute("mail_action", "reset");
+            req.setAttribute("mail_action", "reset");
             JavaMailUtil.sendEmail(reception, code, req);
             getServletContext().getRequestDispatcher("/reset_code.html").forward(req, resp);
         } catch (MessagingException e) {

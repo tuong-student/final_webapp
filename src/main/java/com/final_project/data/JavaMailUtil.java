@@ -11,6 +11,7 @@ public class JavaMailUtil {
 
     public static void sendEmail(String reception, int code, HttpServletRequest request) throws MessagingException {
         String mail_action = request.getAttribute("mail_action").toString();
+        System.out.println(mail_action);
         Properties properties = new Properties();
 
         properties.put("mail.smtp.auth", "true");

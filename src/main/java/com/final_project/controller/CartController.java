@@ -38,13 +38,7 @@ public class CartController extends HttpServlet {
             LineQuantity = 1;
         }
 
-        // creat LineItem and add if action == add, else delete
-        // if (action.equals("+")) {
-        // LineQuantity += 1;
-        // }
-        // if (action.equals("-")) {
-        // LineQuantity -= 1;
-        // }
+        // add Lineitem to cart
         LineItem.setProduct(product);
         LineItem.setQuantity(LineQuantity);
         if (LineQuantity > 0) {
