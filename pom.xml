@@ -91,10 +91,15 @@
       <artifactId>rest-api-sdk</artifactId>
       <version>1.14.0</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>com.heroku.sdk</groupId>
       <artifactId>heroku-maven-plugin</artifactId>
       <version>3.0.3</version>
+    </dependency> -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.3.1</version>
     </dependency>
   </dependencies>
 
